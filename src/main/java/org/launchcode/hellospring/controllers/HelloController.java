@@ -40,10 +40,49 @@ public class HelloController {
                 "<body>" +
                 "<form action='hello' method='post'>" + //submit a request to /hello
                 "<input type='text' name='name'>" +
+                "<select id='language' name= 'language'>" +
+                    "<option value='english'>English</option>" +
+                    "<option value='spanish'>Spanish</option>" +
+                    "<option value='french'>French</option>" +
+                    "<option value='german'>German</option>" +
+                    "<option value='italian'>Italian</option>" +
                 "<input type='submit' value='Greet Me!'>" +
                 "</form>" +
                 "</body>" +
                 "</html>";
+    }
 
+    //createMessage controller takes in a name and language string;
+    //user submits the form (via a POST request)
+    // displays proper greeting based on language string
+    @RequestMapping(value="hello", method= RequestMethod.POST)
+    public String helloPost(@RequestParam String name, @RequestParam String language) {
+        if (name == null) {
+            name = "World";
+        }
+        return createMessage(name, language);
+    }
+
+    public static String createMessage(String name, String language) {
+        String greeting = "";
+        if (language.equals("english")) {
+            greeting = "Hello";
+        }
+        else if (language.equals("spanish")) {
+            greeting = "Hola";
+        }
+        else if (language.equals("french")) {
+            greeting = "Bonjour";
+        }
+        else if (language.equals("german")) {
+            greeting = "Hallo";
+        }
+        else if (language.equals("italian")) {
+            greeting = "Ciao";
+        }
+        return greeting + ", " + name + "!";
+//          link to go back to form page needs an event listener
+//                "<br>" +
+//                "<a href='localhost:8080/hello/form'>Go Back to Form</a>";
     }
 }
