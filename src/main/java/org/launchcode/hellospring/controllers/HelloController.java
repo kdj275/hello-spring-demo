@@ -4,7 +4,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@ResponseBody
 @RequestMapping("hello")
 public class HelloController {
 
@@ -23,12 +22,14 @@ public class HelloController {
 
     // Handles request of the form /hello?name=LaunchCode
     @RequestMapping(method= {RequestMethod.GET, RequestMethod.POST})
+    @ResponseBody
     public String helloWithQueryParam(@RequestParam String name) {
         return "Hello, " + name + "!";
     }
 
     // Handles requests of the form /hello/LaunchCode
     @GetMapping("{name}")
+    @ResponseBody
     public String helloWithPathParam(@PathVariable String name) {
         return "Hello, " + name + "!";
     }
@@ -36,20 +37,7 @@ public class HelloController {
     // Create a form to display form at /hello/form
     @GetMapping("form")
     public String helloForm() {
-        return "<html>" +
-                "<body>" +
-                "<form action='hello' method='post'>" + //submit a request to /hello
-                "<input type='text' name='name'>" +
-                "<select id='language' name= 'language'>" +
-                    "<option value='english'>English</option>" +
-                    "<option value='spanish'>Spanish</option>" +
-                    "<option value='french'>French</option>" +
-                    "<option value='german'>German</option>" +
-                    "<option value='italian'>Italian</option>" +
-                "<input type='submit' value='Greet Me!'>" +
-                "</form>" +
-                "</body>" +
-                "</html>";
+        return "form";
     }
 
     //createMessage controller takes in a name and language string;
